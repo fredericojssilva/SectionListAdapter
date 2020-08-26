@@ -143,7 +143,7 @@ abstract class SectionListAdapter<T, VHI : ViewHolder, VHS : ViewHolder> :
         return false
     }
 
-    protected fun clear() {
+    fun clear() {
         mSections.clear()
     }
 }
