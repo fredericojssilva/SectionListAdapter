@@ -1,0 +1,4 @@
+include ':sectionlistadapter'
+include ':app:sectionlistadapter'
+include ':app'
+rootProject.name = "SectionListAdapter"
