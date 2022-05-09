@@ -1,8 +1,10 @@
 package net.fredericosilva.sectionlistadapter
 
+import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import java.lang.Exception
 import java.util.*
 
 abstract class SectionListAdapter<T, VHI : ViewHolder, VHS : ViewHolder> :
@@ -30,13 +32,17 @@ abstract class SectionListAdapter<T, VHI : ViewHolder, VHS : ViewHolder> :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val section = getSectionByPosition(position)
 
-        if (isHeaderType(section)) {
-            bindViewHolderForSectionHeader(holder as VHS, section?.header, position == 0)
-        } else {
-            bindViewHolderForSectionItem(
-                holder as VHI, getItem(position),
-                getSectionIdByPosition(position)
-            )
+        try {
+            if (isHeaderType(section)) {
+                bindViewHolderForSectionHeader(holder as VHS, section?.header, position == 0)
+            } else {
+                bindViewHolderForSectionItem(
+                    holder as VHI, getItem(position),
+                    getSectionIdByPosition(position)
+                )
+            }
+        } catch (e : Exception){
+            Log.e("SectionListAdapter", "Failed to cast", e)
         }
     }
 
